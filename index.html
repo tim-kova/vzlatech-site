@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VZLA Technologies — Site Concept</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1B2A4A;
+    --navy-deep: #111B30;
+    --navy-mid: #243356;
+    --rust: #C4622D;
+    --rust-light: #D4784A;
+    --rust-pale: #F5E8DF;
+    --sand: #F7F4EF;
+    --white: #FFFFFF;
+    --ink: #1B2A4A;
+    --muted: #6B7A99;
+    --border: #D8DCEA;
+    --font: 'Space Grotesk', sans-serif;
+    --mono: 'Space Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+    background: rgba(17, 27, 48, 0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-mark {
+    width: 32px; height: 32px;
+    background: var(--rust);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .nav-mark svg { width: 20px; height: 20px; fill: white; }
+
+  .nav-wordmark {
+    font-family: var(--font);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  .nav-wordmark span { color: var(--rust-light); }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px; font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: white; }
+
+  .nav-cta {
+    background: var(--rust) !important;
+    color: white !important;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--rust-light) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy-deep);
+    display: flex; align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(196,98,45,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(196,98,45,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(196,98,45,0.12) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust-light);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 24px; height: 1px;
+    background: var(--rust-light);
+  }
+
+  .hero-headline {
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: white;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-headline em {
+    font-style: normal;
+    color: var(--rust-light);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
+
+  .hero-actions {
+    display: flex; align-items: center; gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--rust);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    font-family: var(--font);
+  }
+
+  .btn-primary:hover { background: var(--rust-light); transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    padding: 14px 24px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.15);
+    font-size: 15px; font-weight: 500;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    font-family: var(--font);
+  }
+
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: white; }
+
+  /* Hero right — process preview */
+  .hero-visual {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 32px;
+  }
+
+  .hv-label {
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .hv-step {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .hv-step:last-child { border-bottom: none; }
+
+  .hv-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--rust-light);
+    min-width: 20px;
+    padding-top: 2px;
+  }
+
+  .hv-title {
+    font-size: 14px; font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 3px;
+  }
+
+  .hv-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 96px 48px; }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--navy-deep);
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* ── PROBLEM STRIP ── */
+  .problem { background: var(--sand); }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .problem-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+  }
+
+  .problem-icon {
+    width: 40px; height: 40px;
+    background: var(--rust-pale);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+    font-size: 18px;
+  }
+
+  .problem-title {
+    font-size: 15px; font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .problem-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── SERVICES ── */
+  .services { background: white; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .service-card {
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+
+  .service-card:hover {
+    border-color: var(--rust);
+    box-shadow: 0 4px 24px rgba(196,98,45,0.08);
+  }
+
+  .service-card.featured {
+    border-color: var(--rust);
+    background: var(--navy-deep);
+  }
+
+  .service-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: var(--rust-pale);
+    color: var(--rust);
+    margin-bottom: 20px;
+  }
+
+  .service-card.featured .service-badge {
+    background: rgba(196,98,45,0.2);
+    color: var(--rust-light);
+  }
+
+  .service-title {
+    font-size: 20px; font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .service-card.featured .service-title { color: white; }
+
+  .service-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .service-card.featured .service-desc { color: rgba(255,255,255,0.55); }
+
+  .service-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+
+  .service-list li {
+    font-size: 13px;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .service-card.featured .service-list li { color: rgba(255,255,255,0.75); }
+
+  .service-list li::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--rust);
+    flex-shrink: 0;
+  }
+
+  /* ── PORTFOLIO ── */
+  .portfolio { background: var(--sand); }
+
+  .portfolio-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .portfolio-content { padding: 48px; }
+
+  .portfolio-tag {
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 16px;
+  }
+
+  .portfolio-title {
+    font-size: 26px; font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .portfolio-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .stat-row {
+    display: flex; gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  .stat { }
+  .stat-val {
+    font-size: 28px; font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+  .stat-val span { color: var(--rust); }
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .portfolio-visual {
+    background: var(--navy-deep);
+    display: flex; align-items: center; justify-content: center;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pv-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(196,98,45,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(196,98,45,0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .pv-mock {
+    position: relative; z-index: 2;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .pv-bar {
+    height: 8px; border-radius: 4px;
+    background: rgba(255,255,255,0.08);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .pv-bar-fill {
+    height: 100%; border-radius: 4px;
+    background: var(--rust);
+  }
+
+  .pv-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .pv-row:last-child { border-bottom: none; }
+
+  .pv-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rust);
+    flex-shrink: 0;
+  }
+
+  .pv-dot.green { background: #3DC98C; }
+  .pv-dot.amber { background: #F5A623; }
+
+  .pv-text {
+    height: 8px; border-radius: 3px;
+    background: rgba(255,255,255,0.15);
+    flex: 1;
+  }
+
+  .pv-tag {
+    font-family: var(--mono);
+    font-size: 9px; letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 14px;
+  }
+
+  /* ── ABOUT ── */
+  .about { background: var(--navy-deep); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-title {
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    line-height: 1.15;
+  }
+
+  .about-title em {
+    font-style: normal;
+    color: var(--rust-light);
+  }
+
+  .about-body {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .about-cta {
+    margin-top: 32px;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .about-stat {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .about-stat-val {
+    font-size: 32px; font-weight: 700;
+    color: white;
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+  }
+
+  .about-stat-val span { color: var(--rust-light); }
+
+  .about-stat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ── CTA STRIP ── */
+  .cta-strip {
+    background: var(--rust);
+    padding: 72px 48px;
+  }
+
+  .cta-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 40px; flex-wrap: wrap;
+  }
+
+  .cta-text h2 {
+    font-size: clamp(24px, 2.5vw, 34px);
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .cta-text p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .btn-white {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: white;
+    color: var(--rust);
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 15px; font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.15s;
+    font-family: var(--font);
+  }
+
+  .btn-white:hover { transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-deep);
+    padding: 48px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .footer-copy a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    section { padding: 64px 24px; }
+    .hero { padding: 100px 24px 64px; }
+    .hero-content { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { display: none; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .portfolio-card { grid-template-columns: 1fr; }
+    .portfolio-visual { min-height: 200px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .cta-inner { flex-direction: column; text-align: center; }
+    .footer-inner { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-mark">
+      <svg viewBox="0 0 20 20"><path d="M10 2C7 2 4.5 4 4.5 6.5c0 1.5.7 2.8 1.8 3.6L4 18h12l-2.3-7.9c1.1-.8 1.8-2.1 1.8-3.6C15.5 4 13 2 10 2zm0 7a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
+    </div>
+    <span class="nav-wordmark">VZLA<span>TECH</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-eyebrow">Legacy Modernization · Smart Apps · Paperless Operations</div>
+      <h1 class="hero-headline">Your business runs on<br><em>better systems</em><br>than spreadsheets.</h1>
+      <p class="hero-sub">VZLA Technologies helps small and mid-size businesses replace aging, paper-based workflows with modern tools built for how they actually operate.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Book a Free Discovery Call →</a>
+        <a href="#portfolio" class="btn-ghost">See the work</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hv-label">How it works</div>
+      <div class="hv-step">
+        <div class="hv-num">01</div>
+        <div>
+          <div class="hv-title">Audit your current systems</div>
+          <div class="hv-desc">Identify what's costing you time, money, and accuracy right now.</div>
+        </div>
+      </div>
+      <div class="hv-step">
+        <div class="hv-num">02</div>
+        <div>
+          <div class="hv-title">Design a modern replacement</div>
+          <div class="hv-desc">Custom-built for your workflows — not a generic SaaS subscription.</div>
+        </div>
+      </div>
+      <div class="hv-step">
+        <div class="hv-num">03</div>
+        <div>
+          <div class="hv-title">Deploy and train your team</div>
+          <div class="hv-desc">Go live fast, with hands-on onboarding and full documentation.</div>
+        </div>
+      </div>
+      <div class="hv-step">
+        <div class="hv-num">04</div>
+        <div>
+          <div class="hv-title">Ongoing support & improvements</div>
+          <div class="hv-desc">Monthly retainer keeps the system growing with your business.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="section-inner">
+    <div class="section-eyebrow">Sound familiar?</div>
+    <h2 class="section-title">Still running the business on tools<br>that were never meant for it?</h2>
+    <p class="section-sub">Most growing businesses hit a wall where their systems stop scaling with them. That wall has a cost.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">📋</div>
+        <div class="problem-title">Paper forms and manual data entry</div>
+        <p class="problem-desc">Field crews filling out paper tickets that someone else has to re-enter later. Every step is a chance for error or delay.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">📊</div>
+        <div class="problem-title">Spreadsheets doing the job of software</div>
+        <p class="problem-desc">Excel was never meant to run your operations. When it breaks, nobody knows how — and the person who built it might not be there anymore.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🔌</div>
+        <div class="problem-title">Systems that don't talk to each other</div>
+        <p class="problem-desc">Your dispatch tool, your accounting software, and your field data all live in separate silos. Connecting them takes hours of manual work every week.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="section-eyebrow">Services</div>
+    <h2 class="section-title">What VZLA Technologies does</h2>
+    <p class="section-sub">End-to-end consulting and build services for businesses ready to move past legacy systems.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-badge">Consulting</div>
+        <div class="service-title">Legacy Systems Audit</div>
+        <p class="service-desc">A structured review of your current tools, workflows, and data — identifying exactly where time and money are being lost.</p>
+        <ul class="service-list">
+          <li>Process gap analysis</li>
+          <li>Systems inventory review</li>
+          <li>Prioritized recommendations</li>
+          <li>Clear roadmap for modernization</li>
+        </ul>
+      </div>
+      <div class="service-card featured">
+        <div class="service-badge">Core Service</div>
+        <div class="service-title">Custom App Development</div>
+        <p class="service-desc">Field apps, internal tools, and smart workflows built specifically for how your business operates — not a template.</p>
+        <ul class="service-list">
+          <li>Field operations platforms</li>
+          <li>Paperless dispatch & reporting</li>
+          <li>QBO / accounting integrations</li>
+          <li>Ongoing maintenance retainer</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-badge">Implementation</div>
+        <div class="service-title">Paperless Operations</div>
+        <p class="service-desc">Replace paper forms, manual approvals, and email chains with streamlined digital workflows your whole team can use from day one.</p>
+        <ul class="service-list">
+          <li>Digital forms & sign-off flows</li>
+          <li>Automated reporting</li>
+          <li>Team onboarding & training</li>
+          <li>Documentation & support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="section-inner">
+    <div class="section-eyebrow">Featured Work</div>
+    <h2 class="section-title">Built from the inside out</h2>
+    <p class="section-sub">Real systems built for real operations — not demos.</p>
+    <div class="portfolio-card">
+      <div class="portfolio-content">
+        <div class="portfolio-tag">Case Study · Field Operations Platform</div>
+        <h3 class="portfolio-title">D&L Environmental — Field App</h3>
+        <p class="portfolio-desc">Identified systemic gaps in a growing environmental services company's field operations. Designed and built a full-stack platform to replace paper tickets, manual dispatch, and disconnected billing — integrating directly with QuickBooks Online and existing fleet systems.</p>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-val">20<span>+</span></div>
+            <div class="stat-label">Active users</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">4<span>+</span></div>
+            <div class="stat-label">Departments connected</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">0</div>
+            <div class="stat-label">Paper tickets remaining</div>
+          </div>
+        </div>
+        <a href="#contact" class="btn-primary" style="font-size: 14px; padding: 11px 22px;">Discuss a similar project →</a>
+      </div>
+      <div class="portfolio-visual">
+        <div class="pv-grid"></div>
+        <div class="pv-mock">
+          <div class="pv-bar"><div class="pv-bar-fill" style="width: 78%"></div></div>
+          <div class="pv-row"><div class="pv-dot green"></div><div class="pv-text" style="max-width: 140px"></div></div>
+          <div class="pv-row"><div class="pv-dot"></div><div class="pv-text" style="max-width: 100px"></div></div>
+          <div class="pv-row"><div class="pv-dot amber"></div><div class="pv-text" style="max-width: 120px"></div></div>
+          <div class="pv-row"><div class="pv-dot green"></div><div class="pv-text" style="max-width: 80px"></div></div>
+          <div class="pv-row"><div class="pv-dot green"></div><div class="pv-text" style="max-width: 110px"></div></div>
+          <div class="pv-tag">Field Operations Platform</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div class="section-eyebrow" style="color: var(--rust-light);">About VZLA Technologies</div>
+        <h2 class="about-title">Built by someone who's<br><em>worked inside</em><br>the problem.</h2>
+        <p class="about-body">VZLA Technologies was founded by a systems and operations professional with a background spanning oil and gas project controls, environmental services, and internal software development. The gap between how a business operates and how its technology supports it isn't theoretical — it's something I've fixed firsthand.</p>
+        <p class="about-body">Based in the Okanagan, BC. Working with SMBs across Western Canada who are ready to stop patching legacy systems and start building something that actually scales.</p>
+        <div class="about-cta">
+          <a href="#contact" class="btn-primary">Work with VZLA Tech →</a>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="about-stat-val">10<span>+</span></div>
+          <div class="about-stat-label">Years in operations & finance</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-val">4<span>+</span></div>
+          <div class="about-stat-label">Industries served</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-val">0</div>
+          <div class="about-stat-label">Generic SaaS templates used</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-val">BC</div>
+          <div class="about-stat-label">Based in Kelowna, BC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="cta-strip" id="contact">
+  <div class="cta-inner">
+    <div class="cta-text">
+      <h2>Ready to see what's costing you?</h2>
+      <p>Book a free 30-minute discovery call. No pitch — just an honest look at your systems.</p>
+    </div>
+    <a href="mailto:hello@vzlatech.ca" class="btn-white">Book a Free Call →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="nav-logo" style="text-decoration: none;">
+      <div class="nav-mark">
+        <svg viewBox="0 0 20 20" style="width:20px;height:20px;fill:white"><path d="M10 2C7 2 4.5 4 4.5 6.5c0 1.5.7 2.8 1.8 3.6L4 18h12l-2.3-7.9c1.1-.8 1.8-2.1 1.8-3.6C15.5 4 13 2 10 2zm0 7a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
+      </div>
+      <span class="nav-wordmark">VZLA<span>TECH</span></span>
+    </div>
+    <div class="footer-copy">
+      © 2026 VZLA Technologies Inc. · <a href="mailto:hello@vzlatech.ca">hello@vzlatech.ca</a> · vzlatech.ca
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
