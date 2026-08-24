@@ -50,7 +50,7 @@
     --navy-rgb:        27, 42, 74;
     --navy-deep-rgb:   17, 27, 48;
     --navy-mid-rgb:    36, 51, 86;   /* palette completeness; currently unused */
-    --rust-rgb:       196, 98, 45;
+    --rust-rgb:       168, 84, 38;    /* darkened from #C4622D — see --accent */
     --rust-light-rgb: 212, 120, 74;
     --rust-pale-rgb:  245, 232, 223;
     --sand-rgb:       247, 244, 239;
@@ -170,19 +170,26 @@
     --text-muted:  rgb(var(--slate-rgb));
 
     /* Accent */
+    /* White on the old #C4622D was 4.09:1 — under AA for every filled
+       button and the CTA strip. #A85426 is 5.3:1, and 5.3:1 as text on
+       white for .btn-white's label. */
     --accent:         var(--rust);        /* filled buttons, dots, rules */
-    --accent-hover:   var(--rust-light);
+    /* Hover still BRIGHTENS, just not as far: --rust-light (#D4784A) is
+       only 3.2:1 under white and would fail on hover. This is 4.56:1 and
+       still visibly lighter than --accent. --rust-light stays as it is
+       for --ink-accent, where it sits on dark and reads fine. */
+    --accent-hover:   #B85C2A;
     /* Accent as TEXT needs more contrast than accent as a fill: --rust on
        white is 4.06:1, under the 4.5:1 floor for the 11px eyebrows and
        tags that use it. This darker rust is 5.44:1 on --bg, 4.96:1 on the
        --surface-alt band. Fills keep the brand --rust above. */
     --accent-ink:     #A8511F;            /* accent used AS text on --bg */
     --accent-soft:    var(--rust-pale);   /* tinted chip / icon grounds */
-    --accent-on-soft: var(--rust);        /* text on --accent-soft */
+    --accent-on-soft: #A45225;            /* 4.59:1 on --accent-soft; --rust itself is 4.42:1 there */
 
     /* Content printed on the accent fill (CTA strip) */
     --on-accent:       var(--white);
-    --on-accent-muted: rgba(var(--white-rgb), 0.75);
+    --on-accent-muted: rgba(var(--white-rgb), 0.90);  /* 4.63:1 on --accent; 0.75 was 3.73:1 */
 
     /* ── Ink context ── */
     --ink-bg-rgb: var(--navy-deep-rgb);
